@@ -89,6 +89,7 @@ public class DB {
 		}
 		return null;
 	}
+	
 	public boolean insertUser(User user) {
 		String sql = "INSERT INTO 사용자 (id,password,name,age,gender,height,weight,goal_weight) VALUES"
 				+ "(?,?,?,?,?,?,?,?)";
