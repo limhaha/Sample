@@ -2,6 +2,7 @@ package view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -9,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
+import server.Food;
 import server.User;
 
 public class Main extends JFrame {
@@ -34,11 +36,13 @@ public class Main extends JFrame {
 
 	public interface MainListener {
 		User getUser();
+		void requestFoodList(String tableName);
 	}
 
 	public Main(MainListener listener) {
 		this.listener = listener;
 		initGUI();
+		listener.requestFoodList("과일류");
 	}
 
 	public void initGUI() {
@@ -104,6 +108,11 @@ public class Main extends JFrame {
 
 	}
 
+	public void setFoodList(List<Food> foodList) {
+		for(Food food : foodList) {
+			System.out.println(food.getName() +" " + food.getUnit() +" " + food.getKal());
+		}
+	}
 	class status_pan extends JPanel {
 
 		public status_pan(String id) {
@@ -117,7 +126,7 @@ public class Main extends JFrame {
 	class food_pan extends JPanel {
 
 		public food_pan() {
-			jtp.add("FOOD", new Food());
+			jtp.add("FOOD", new FoodPanel());
 		}
 
 	}

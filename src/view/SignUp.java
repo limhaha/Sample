@@ -42,6 +42,7 @@ public class SignUp extends JFrame {
 	ButtonGroup genderButton = new ButtonGroup();
 	String s;
 
+	private boolean duplicate = true;
 	private LoginListener listener;
 
 	public SignUp(LoginListener listener) {
@@ -165,7 +166,6 @@ public class SignUp extends JFrame {
 		setVisible(true);
 
 		Nbt.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
@@ -229,12 +229,18 @@ public class SignUp extends JFrame {
 				} else if (pw.equals(pwconf) == false) {
 					JOptionPane.showMessageDialog(null, "PASSWORDCONFIRM field and PASSWORD field differ!!");
 				} else {
-					boolean valid = listener.onClickSignUp(new User(id, pw, name, age, gender, height, weight, goal));
-					if (valid) {
-						JOptionPane.showMessageDialog(null, "추카포카 회원가입 성공");
-						dispose();
-					} else {
-						JOptionPane.showMessageDialog(null, "회원가입 실패라능 ㅇㅅㅇ");
+					if (!duplicate) {
+						boolean valid = listener
+								.onClickSignUp(new User(id, pw, name, age, gender, height, weight, goal));
+						if (valid) {
+							JOptionPane.showMessageDialog(null, "추카포카 회원가입 성공");
+							dispose();
+						} else {
+							JOptionPane.showMessageDialog(null, "회원가입 실패라능 ㅇㅅㅇ");
+						}
+					}
+					else {
+						JOptionPane.showMessageDialog(null, "중복체크를 해주세요");
 					}
 				}
 			}
@@ -244,11 +250,15 @@ public class SignUp extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				boolean check = listener.onCheckDuplicate(IDTextField.getText());
-				if (!check) {
-					JOptionPane.showMessageDialog(null, "중복됨 딴거 쓰셈 ㅋ");
+				if (IDTextField.getText().length() > 0) {
+					duplicate = listener.onCheckDuplicate(IDTextField.getText());
+					if (duplicate) {
+						JOptionPane.showMessageDialog(null, "중복됨 딴거 쓰셈 ㅋ");
+					} else {
+						JOptionPane.showMessageDialog(null, "쓰셈ㅋ");
+					}
 				} else {
-					JOptionPane.showMessageDialog(null, "쓰셈ㅋ");
+					JOptionPane.showMessageDialog(null, "아이디를 입력하세요");
 				}
 			}
 		});

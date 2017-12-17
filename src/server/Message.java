@@ -5,18 +5,13 @@ public class Message implements Serializable{
 	public static final int ID_CHECK = 1;
 	public static final int SIGN_UP = 2;
 	public static final int LOGIN =3;
+	public static final int GET_FOOD_LIST = 4;
 	private int what;
 	private String arg = null;
 	private String arg2 = null;
 	private boolean valid = false;
-	private User user = null;
+	private Object object = null;
 
-	public User getUser() {
-		return user;
-	}
-	public void setUser(User user) {
-		this.user = user;
-	}
 	public boolean isValid() {
 		return valid;
 	}
@@ -58,5 +53,11 @@ public class Message implements Serializable{
 	}
 	public void setArg2(String arg2) {
 		this.arg2 = arg2;
+	}
+	public Object getObject() {
+		return object;
+	}
+	public void setObject(Object object) {
+		this.object = object;
 	}
 }

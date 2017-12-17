@@ -108,7 +108,7 @@ public class Login extends JFrame {
 					JOptionPane.showMessageDialog(null, "text field space!!");
 				} else {
 					if (!listener.onClickLogin(id, pw)) {
-						JOptionPane.showMessageDialog(null, "로그인 실패");
+						JOptionPane.showMessageDialog(null, "아이디와 비밀번호를 확인해주세요");
 					}
 
 				}

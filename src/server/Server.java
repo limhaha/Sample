@@ -6,43 +6,41 @@ import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
+import java.util.List;
 
 import controller.MessageHandler;
-
 
 public class Server {
 	public final static int PORT = 9000;
 	public final static String ADDRESS = "127.0.0.1";
-	
+
 	private ServerSocket listener;
-	
+	private DB db;
+
 	public Server() {
 		try {
 			initServer();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		db = DB.getInstance();
+
 	}
-	
-	private final void initServer() throws IOException{
-			listener = new ServerSocket(PORT);
+
+	private final void initServer() throws IOException {
+		listener = new ServerSocket(PORT);
 	}
-	
-	private final void initDB() {
-		
-	}
-	
+
 	public final void startServer() {
 		System.out.println("The chat server is running");
 		try {
 			while (true) {
 				new Handler(listener.accept()).start();
 			}
-		}  catch (IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
-		}
-		finally {
-			//서버가 사용한 자원들을 해제하는 곳
+		} finally {
+			// 서버가 사용한 자원들을 해제하는 곳
 			System.out.println("The chat server isn't running");
 			try {
 				listener.close();
@@ -52,13 +50,12 @@ public class Server {
 			}
 		}
 	}
-	
-	private class Handler extends Thread implements MessageHandler{
+
+	private class Handler extends Thread implements MessageHandler {
 
 		private Socket socket;
 		private ObjectOutputStream out;
 		private ObjectInputStream in;
-
 
 		public Handler(Socket socket) {
 			this.socket = socket;
@@ -73,18 +70,18 @@ public class Server {
 				e.printStackTrace();
 			}
 		}
-		
+
 		public void run() {
 			initHandler();
-			while(true) {
+			while (true) {
+				Message message;
 				try {
 					Object o = in.readObject();
-					if(!(o instanceof Message)) {
+					if (!(o instanceof Message)) {
 						continue;
 					}
-					Message message = (Message)o;
+					message = (Message) o;
 					MessageHandle(message);
-					message = null;
 				} catch (SocketException e) {
 					break;
 				} catch (ClassNotFoundException e) {
@@ -93,31 +90,40 @@ public class Server {
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				} 
+				} finally {
+					message = null;
+				}
 			}
 		}
 
 		@Override
-		public void MessageHandle(Message message) throws IOException{
-			switch(message.getWhat()) {
-			case Message.ID_CHECK:{
-				//중복체크 코드
-				message.setValid(true);
+		public void MessageHandle(Message message) throws IOException {
+			System.out.println(message.getWhat() + " handle");
+			switch (message.getWhat()) {
+			case Message.ID_CHECK: {
+				message.setValid(db.checkID(message.getArg()));
 				out.writeObject(message);
 				break;
 			}
-			case Message.SIGN_UP:{
+			case Message.SIGN_UP: {
+				if (message.getObject() instanceof User) {
+					message.setValid(db.insertUser((User) message.getObject()));
+					out.writeObject(message);
+				}
 				break;
 			}
-			case Message.LOGIN:{
-				//아이디랑 패스워드 확인
-				message.setValid(true);
-				message.setUser(new User("tester","014015", "Sun", 27, "Man", 173, 70, 65));
+			case Message.LOGIN: {
+				message.setObject(db.checkUser(message.getArg(), message.getArg2()));
 				out.writeObject(message);
 				break;
 			}
+			case Message.GET_FOOD_LIST: {
+				List<Food> foodList = db.getFoodList(message.getArg());
+				message.setObject(foodList);
+				out.writeObject(message);
 			}
-			
+			}
+
 		}
 	}
 }
