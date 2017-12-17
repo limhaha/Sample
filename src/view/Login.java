@@ -69,32 +69,16 @@ public class Login extends JFrame {
 		Mypanel panel = new Mypanel();
 		panel.setBounds(0, 0, 1600, 900);
 
-		loginTextField = new JTextField(15);
-		loginTextField.setBounds(731, 399, 280, 30);
-		loginTextField.setOpaque(false);
-		loginTextField.setForeground(Color.RED);
-		loginTextField.setBorder(javax.swing.BorderFactory.createEmptyBorder());
+		loginTextField = Utility.createTextField(15, 731, 399, 280, 30, false, Color.RED);
 		layeredPane.add(loginTextField);
 
-		passwordField = new JPasswordField(15);
-		passwordField.setBounds(731, 529, 280, 30);
-		passwordField.setOpaque(false);
-		passwordField.setForeground(Color.green);
-		passwordField.setBorder(javax.swing.BorderFactory.createEmptyBorder());
+		passwordField = Utility.createPasswordField(731, 529, 280, 30, false, Color.GREEN);
 		layeredPane.add(passwordField);
 
-		lgbt = new JButton(new ImageIcon("image/btLogin_hud.png"));
-		lgbt.setBounds(755, 589, 104, 48);
-		lgbt.setBorderPainted(false);
-		lgbt.setFocusPainted(false);
-		lgbt.setContentAreaFilled(false);
+		lgbt = Utility.createButton(new ImageIcon("image/btLogin_hud.png"), 755, 589, 104, 48);
 		layeredPane.add(lgbt);
 
-		sgbt = new JButton(new ImageIcon("image/signup_icon.jpg"));
-		sgbt.setBounds(735, 689, 184, 35);
-		sgbt.setBorderPainted(false);
-		sgbt.setFocusPainted(false);
-		sgbt.setContentAreaFilled(false);
+		sgbt = Utility.createButton(new ImageIcon("image/signup_icon.jpg"), 735, 689, 184, 35);
 		layeredPane.add(sgbt);
 
 		// action login

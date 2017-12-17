@@ -71,40 +71,21 @@ public class SignUp extends JFrame {
 		Mypanel panel = new Mypanel();
 		panel.setBounds(0, 0, 750, 1334);
 		// 아이디
-		IDTextField = new JTextField();
-		IDTextField.setBounds(100, 100, 280, 30); // 로그인 텍스트 필드 위치
-		IDTextField.setOpaque(false); // 투명하게 하기
-		IDTextField.setForeground(Color.BLACK);
-		IDTextField.setBorder(javax.swing.BorderFactory.createEmptyBorder());// 투명하게 하기
+		IDTextField = Utility.createTextField(100, 100, 280, 30, false, Color.BLACK);
 		layeredPane.add(IDTextField); // 패널에 놓기
 
 		// 비밀번호
-		passwordField = new JPasswordField();
-		passwordField.setBounds(100, 150, 280, 30); // 패스워드 텍스트 필드 위치
-		passwordField.setOpaque(false);// 투명하게하기
-		passwordField.setForeground(Color.BLACK);
-		passwordField.setBorder(javax.swing.BorderFactory.createEmptyBorder());// 투명하게하기
+		passwordField = Utility.createPasswordField(100, 150, 280, 30, false, Color.BLACK);
+		
 		layeredPane.add(passwordField);
 		// 비밀번호확인
-		passwordConfirmField = new JPasswordField();
-		passwordConfirmField.setBounds(100, 200, 280, 30); // 패스워드 텍스트 필드 위치
-		passwordConfirmField.setOpaque(false);// 투명하게하기
-		passwordConfirmField.setForeground(Color.BLACK);
-		passwordConfirmField.setBorder(javax.swing.BorderFactory.createEmptyBorder());// 투명하게하기
+		passwordConfirmField = Utility.createPasswordField(100, 200, 280, 30, false, Color.BLACK);
 		layeredPane.add(passwordConfirmField);
 		// 이름
-		NameTextField = new JTextField();
-		NameTextField.setBounds(100, 250, 280, 30); // 로그인 텍스트 필드 위치
-		NameTextField.setOpaque(false); // 투명하게 하기
-		NameTextField.setForeground(Color.BLACK);
-		NameTextField.setBorder(javax.swing.BorderFactory.createEmptyBorder());// 투명하게 하기
+		NameTextField = Utility.createTextField(100, 250, 280, 30, false, Color.BLACK);
 		layeredPane.add(NameTextField);
 		// 나이
-		AgeTextField = new JTextField();
-		AgeTextField.setBounds(100, 300, 280, 30); // 로그인 텍스트 필드 위치
-		AgeTextField.setOpaque(false); // 투명하게 하기
-		AgeTextField.setForeground(Color.BLACK);
-		AgeTextField.setBorder(javax.swing.BorderFactory.createEmptyBorder());// 투명하게 하기
+		AgeTextField = Utility.createTextField(100, 300, 280, 30, false, Color.BLACK);
 		layeredPane.add(AgeTextField);
 		// 성
 		rdbt1 = new JRadioButton("F");
@@ -119,41 +100,21 @@ public class SignUp extends JFrame {
 		layeredPane.add(rdbt2);
 
 		// 키
-		HeightTextField = new JTextField();
-		HeightTextField.setBounds(100, 400, 280, 30); // 로그인 텍스트 필드 위치
-		HeightTextField.setOpaque(false); // 투명하게 하기
-		HeightTextField.setForeground(Color.BLACK);
-		HeightTextField.setBorder(javax.swing.BorderFactory.createEmptyBorder());// 투명하게 하기
+		HeightTextField = Utility.createTextField(100, 400, 280, 30, false, Color.BLACK);
 		layeredPane.add(HeightTextField);
 		// 몸무게
-		WeightTextField = new JTextField();
-		WeightTextField.setBounds(100, 450, 280, 30); // 로그인 텍스트 필드 위치
-		WeightTextField.setOpaque(false); // 투명하게 하기
-		WeightTextField.setForeground(Color.BLACK);
-		WeightTextField.setBorder(javax.swing.BorderFactory.createEmptyBorder());// 투명하게 하기
+		WeightTextField =  Utility.createTextField(100, 450, 280, 30, false, Color.BLACK);
 		layeredPane.add(WeightTextField);
 		// 목표
-		GoalTextField = new JTextField();
-		GoalTextField.setBounds(100, 500, 280, 30); // 로그인 텍스트 필드 위치
-		GoalTextField.setOpaque(false); // 투명하게 하기
-		GoalTextField.setForeground(Color.BLACK);
-		GoalTextField.setBorder(javax.swing.BorderFactory.createEmptyBorder());// 투명하게 하기
+		GoalTextField =  Utility.createTextField(100, 500, 280, 30, false, Color.BLACK);
 		layeredPane.add(GoalTextField);
 
 		// 확인버튼
-		Ybt = new JButton("회원가입 완료");// 버튼에 이미지 추가
-		Ybt.setBounds(100, 600, 115, 23);
-		Ybt.setBorderPainted(false);// 투명하게하기
-		Ybt.setFocusPainted(false);// 투명하게하기
-		Ybt.setContentAreaFilled(false);// 투명하게하기
+		Ybt = Utility.createButton("회원가입 완료", 100, 600, 115, 23);
 		layeredPane.add(Ybt);// 패널에 넣기
 
 		// 취소버튼
-		Nbt = new JButton("회원가입 취소");// 버튼에 이미지 추가
-		Nbt.setBounds(217, 600, 115, 23);
-		Nbt.setBorderPainted(false);// 투명하게하기
-		Nbt.setFocusPainted(false);// 투명하게하기
-		Nbt.setContentAreaFilled(false);// 투명하게하기
+		Nbt = Utility.createButton("회원가입 취소", 217, 600, 115, 23);	
 		layeredPane.add(Nbt);// 패널에 넣기
 
 		// 중복확인
